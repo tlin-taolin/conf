@@ -1,0 +1,9 @@
+jupyterlab
+matplotlib
+numpy
+scipy
+setuptools
+sklearn
+tensorboard
+ipdb
+lmdb

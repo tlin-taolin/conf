@@ -130,6 +130,11 @@ prompt "Install ultimate vim configuration."
 curl https://j.mp/spf13-vim3 -L -o - | sh
 
 
+prompt "Configure tmux and screen."
+cp ../common/.screenrc ~/
+cp ../common/.tmux.conf ~/
+
+
 prompt "Install pip and other packages"
 pip install --upgrade pip setuptools wheel
 

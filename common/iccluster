@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if test -z "${1}" ; then
+    echo "$0: error, too few argument"
+    exit 1
+fi
+
+ssh-keygen -f "~/.ssh/known_hosts" -R iccluster${1}.iccluster.epfl.ch > /dev/null 2>&1
+ssh-keygen -f "~/.ssh/known_hosts" -R iccluster${1}.iccluster > /dev/null 2>&1
+ssh-keygen -f "~/.ssh/known_hosts" -R iccluster${1} > /dev/null 2>&1
+
+ssh lin@iccluster${1}.iccluster.epfl.ch

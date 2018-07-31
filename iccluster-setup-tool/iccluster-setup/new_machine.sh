@@ -6,9 +6,11 @@ cp /mlodata1/tlin/dl-system/conf/iccluster-setup-tool/.profile ~/
 curl http://j.mp/spf13-vim3 -L -o - | sh
 
 # configure tmux
-cp -rf /mlodata1/tlin/dl-system/conf/.tmux.conf ~/
-cp -rf /mlodata1/tlin/dl-system/conf/.screenrc ~/
+cp -rf /mlodata1/tlin/dl-system/conf/common/.tmux.conf ~/
+cp -rf /mlodata1/tlin/dl-system/conf/common/.screenrc ~/
+
+cp -rf /mlodata1/tlin/dl-system/conf/common/iccluster /usr/local/bin/
+sudo chmod +x /usr/local/bin/iccluster
 
 # install autojump
 sudo apt-get install autojump
-

@@ -49,7 +49,9 @@ cd pytorch && \
     $pip_in_env install -v . && cd .. && rm -rf pytorch/
 
 # install tensorpack
-$pip_in_env install --user -U git+https://github.com/ppwwyyxx/tensorpack.git
+sudo /opt/anaconda3/bin/conda install -y -c conda-forge pyarrow --prefix=$current_env
+sudo /opt/anaconda3/bin/conda install -y -c anaconda msgpack --prefix=$current_env
+sudo /opt/anaconda3/bin/conda install -y -c anaconda msgpack-numpy --prefix=$current_env
 
 # Install torchvision from source
 if [[ "$1" ==  "--no-vision" ]];
@@ -60,4 +62,3 @@ fi
 # install torchvision
 git clone https://github.com/pytorch/vision.git
 cd vision && $python_in_env setup.py install && cd .. && rm -rf vision/
-

@@ -9,8 +9,5 @@ curl http://j.mp/spf13-vim3 -L -o - | sh
 cp -rf /mlodata1/tlin/dl-system/conf/common/.tmux.conf ~/
 cp -rf /mlodata1/tlin/dl-system/conf/common/.screenrc ~/
 
-sudo cp -rf /mlodata1/tlin/dl-system/conf/common/iccluster /usr/local/bin/iccluster
-sudo chmod +x /usr/local/bin/iccluster
-
 # install autojump
 sudo apt-get install autojump

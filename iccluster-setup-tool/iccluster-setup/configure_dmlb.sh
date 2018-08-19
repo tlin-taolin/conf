@@ -1,9 +1,8 @@
 #!/bin/bash
 
 # Create and activate env  --  Install pytorch from conda
-export PATH="$PATH:/opt/anaconda3/bin"
 echo 'Creating env and Installing pip'
-conda create -y pip --name dmlb-env
+conda create -y -n dmlb-env python=3.6 anaconda pip
 source activate dmlb-env
 
 # Get the pip and python and conda from anaconda
@@ -40,7 +39,8 @@ export CMAKE_PREFIX_PATH="$(dirname $(which conda))/../"
 
 sudo /opt/anaconda3/bin/conda install -y jpeg numpy pyyaml mkl mkl-include setuptools cmake cffi --prefix=$current_env
 sudo /opt/anaconda3/bin/conda install -y -c soumith magma-cuda90 --prefix=$current_env
-sudo /opt/anaconda3/bin/conda install -y  opencv protobuf --prefix=$current_env
+sudo /opt/anaconda3/bin/conda install -y opencv protobuf --prefix=$current_env
+sudo /opt/anaconda3/bin/conda install -y -c anaconda cython --prefix=$current_env
 
 git clone --recursive https://github.com/pytorch/pytorch
 cd pytorch && \
@@ -49,9 +49,7 @@ cd pytorch && \
     $pip_in_env install -v . && cd .. && rm -rf pytorch/
 
 # install tensorpack
-sudo /opt/anaconda3/bin/conda install -y -c conda-forge pyarrow --prefix=$current_env
-sudo /opt/anaconda3/bin/conda install -y -c anaconda msgpack --prefix=$current_env
-sudo /opt/anaconda3/bin/conda install -y -c anaconda msgpack-numpy --prefix=$current_env
+$pip_in_env install --user -U git+https://github.com/ppwwyyxx/tensorpack.git
 
 # Install torchvision from source
 if [[ "$1" ==  "--no-vision" ]];

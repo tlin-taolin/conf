@@ -39,8 +39,12 @@ export CMAKE_PREFIX_PATH="$(dirname $(which conda))/../"
 
 sudo /opt/anaconda3/bin/conda install -y jpeg numpy pyyaml mkl mkl-include setuptools cmake cffi --prefix=$current_env
 sudo /opt/anaconda3/bin/conda install -y -c soumith magma-cuda90 --prefix=$current_env
-sudo /opt/anaconda3/bin/conda install -y opencv protobuf --prefix=$current_env
+sudo /opt/anaconda3/bin/conda install -y protobuf --prefix=$current_env
 sudo /opt/anaconda3/bin/conda install -y -c anaconda cython --prefix=$current_env
+
+# install left packages.
+$pip_in_env install opencv-python
+
 
 git clone --recursive https://github.com/pytorch/pytorch
 cd pytorch && \

@@ -7,3 +7,4 @@ sklearn
 tensorboard
 ipdb
 lmdb
+joblib

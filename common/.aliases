@@ -4,13 +4,12 @@ alias mv='mv -i'
 alias cp='cp -i'
 
 # Add some easy shortcuts for formatted directory listings and add a touch of color.
-alias l="ls -alsh --color=auto"
-alias ll='ls -lF --color=auto'
-alias la='ls -alF --color=auto'
+alias l="ls -alsh"
+alias ll='ls -lF'
+alias la='ls -alF'
 alias ls='ls -F'
 
 # more shortcuts
-alias ll='ls -Ghlas'
 alias ..='cd ..'
 alias ...='cd .. ; cd ..'
 alias g='grep -i'  #case insensitive grep
@@ -27,5 +26,12 @@ alias grep='grep --color=auto --exclude-dir=\.svn'
 alias svnkdiff3='svn diff --diff-cmd kdiff3'
 
 # Github
-alias gits='git status'
-alias gita='git add'
+alias gs='git status'
+alias ga='git add'
+alias gd='git diff'
+alias gm='git commit -m'
+
+# local case
+alias ssh_cscs='ssh tlin@ela.cscs.ch'
+alias mount_iccluster131='sshfs lin@iccluster131.iccluster.epfl.ch:/home/lin $HOME/mount/iccluster131_home -ovolname=iccluster131'
+alias mount_mlodata1='sshfs -o allow_other,transform_symlinks lin@iccluster071.iccluster.epfl.ch:/mlodata1 $HOME/mount/mlodata1 -ovolname=mlodata1'

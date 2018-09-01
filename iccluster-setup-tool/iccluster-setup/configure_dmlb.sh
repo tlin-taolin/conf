@@ -2,7 +2,7 @@
 
 # Create and activate env  --  Install pytorch from conda
 echo 'Creating env and Installing pip'
-conda create -y -n dmlb-env python=3.6 anaconda pip
+conda create -y -n dmlb-env python=3.6.3 anaconda pip
 source activate dmlb-env
 
 # Get the pip and python and conda from anaconda
@@ -53,7 +53,7 @@ cd pytorch && \
     $pip_in_env install -v . && cd .. && rm -rf pytorch/
 
 # install tensorpack
-$pip_in_env install --user -U git+https://github.com/ppwwyyxx/tensorpack.git
+# $pip_in_env install --user -U git+https://github.com/ppwwyyxx/tensorpack.git
 
 # Install torchvision from source
 if [[ "$1" ==  "--no-vision" ]];

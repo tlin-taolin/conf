@@ -72,10 +72,6 @@ brew doctor
 brew tap homebrew/dupes
 
 
-prompt "Upgrade zsh"
-brew install zsh zsh-completions zsh-syntax-highlighting
-sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
 prompt "Install Java"
 brew tap caskroom/versions
 brew cask install java8
@@ -99,6 +95,7 @@ brew install wget
 brew install autojump
 brew install markdown
 brew install ant
+brew install ack
 
 
 prompt "Install brew software."
@@ -120,11 +117,20 @@ brew cask install sourcetree
 brew cask install easyfind
 brew cask install macvim
 brew cask install mendeley
+brew cask install dash
 
 
-prompt "Install apm packages."
-install 'apm install' ${apms[@]}
-
+prompt "Upgrade and configure zsh"
+brew install zsh zsh-completions zsh-syntax-highlighting
+# install oh-my-zsh
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+# configure zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+# configure aliase for zsh
+cp ../common/.aliases ~/
+echo '
+# set aliase
+source ~/.aliases' >> ~/.zshrc
 
 prompt "Install ultimate vim configuration."
 curl https://j.mp/spf13-vim3 -L -o - | sh
@@ -133,6 +139,9 @@ curl https://j.mp/spf13-vim3 -L -o - | sh
 prompt "Configure tmux and screen."
 cp ../common/.screenrc ~/
 cp ../common/.tmux.conf ~/
+
+prompt "Install apm packages."
+install 'apm install' ${apms[@]}
 
 
 prompt "Install pip and other packages"

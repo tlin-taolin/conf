@@ -23,6 +23,6 @@ shopt -s histappend
 PROMPT_COMMAND='history -a'
 
 # Add bash aliases.
-if [ -f ~/.bash_aliases ]; then
-    source ~/.bash_aliases
+if [ -f ~/.aliases ]; then
+    source ~/.aliases
 fi

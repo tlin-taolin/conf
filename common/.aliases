@@ -30,6 +30,8 @@ alias gs='git status'
 alias ga='git add'
 alias gd='git diff'
 alias gm='git commit -m'
+alias gp='git push'
+
 
 # local case
 alias ssh_cscs='ssh tlin@ela.cscs.ch'

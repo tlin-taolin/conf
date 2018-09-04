@@ -144,6 +144,11 @@ prompt "Install apm packages."
 install 'apm install' ${apms[@]}
 
 
+prompt "Install node.js and hexo."
+brew install node
+npm install -g hexo-cli
+
+
 prompt "Install pip and other packages"
 pip install --upgrade pip setuptools wheel
 

@@ -1,0 +1,10 @@
+version: '2'
+services:
+    basis:
+        build: ./basis/
+        image: itamtao/snakemake-basis
+    dependencies:
+        build: ./dependencies/
+        image: itamtao/snakemake-depencies
+        depends_on:
+          - basis

@@ -1,0 +1,15 @@
+version: '2'
+services:
+    jupyter-base-notebook:
+        build: ./jupyter-base-notebook/
+        image: itamtao/jupyter-base-notebook:latest
+    jupyter-python-notebook:
+        build: ./jupyter-python-notebook/
+        image: itamtao/jupyter-python-notebook:latest
+        depends_on:
+            - jupyter-base-notebook
+    jupyter-scala-notebook:
+        build: ./jupyter-scala-notebook/
+        image: itamtao/jupyter-scala-notebook:latest
+        depends_on:
+            - jupyter-base-notebook

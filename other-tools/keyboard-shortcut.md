@@ -1,0 +1,11 @@
+# mac
+* switch window: <ctr> + <left/right>
+* back/forward chrome: <cmd> + <left/right>
+
+# iterm2
+* switch pane: <alt/opt> + <cmd> + <left/right/up/down>
+* switch tab: <cmd> + <left/down>
+
+# atom
+* quick select: <shift> + <cmd> + <left/right/up/down>
+* quick go to left/righttop/down: <cmd> + <left/right/up/down>

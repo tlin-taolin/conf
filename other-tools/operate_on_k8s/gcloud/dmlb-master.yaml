@@ -1,0 +1,62 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dmlb-master
+  labels:
+    name: dmlb-master
+    role: master
+spec:
+  nodeSelector:
+    cloud.google.com/gke-preemptible: "true"
+  containers:
+    - name:  dmlb-master
+      image: itamtao/pytorch-mpi:cuda9
+      imagePullPolicy: Always
+      stdin: true
+      tty: true
+      command:
+        - sleep
+        - infinity
+      ports:
+        - containerPort: 8888
+          name: notebook
+        - containerPort: 6006
+          name: tensorboard
+        - containerPort: 22
+          name: ssh
+      env:
+        - name: ROLE
+          value: "master"
+      resources:
+        limits:
+          nvidia.com/gpu: 2
+      volumeMounts:
+        - mountPath: /mlodata1
+          name: my-pvc-nfs
+        - mountPath: /dev/shm
+          name: dshm
+  volumes:
+    - name: my-pvc-nfs
+      persistentVolumeClaim:
+        claimName: nfs
+    - name: dshm
+      emptyDir:
+        medium: Memory
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: net
+  labels:
+    name: net
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8888
+      name: notebook
+    - port: 6006
+      name: tensorboard
+    - port: 22
+      name: ssh
+  selector:
+    name: net

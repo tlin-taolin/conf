@@ -29,6 +29,7 @@ apms=(
   pdf-view
   preview-inline
   python-tools
+  remote-sync
 )
 ####################### EOF: Define a list of app to install #######################
 

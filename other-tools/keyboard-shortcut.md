@@ -5,6 +5,7 @@
 # iterm2
 * switch pane: <alt/opt> + <cmd> + <left/right/up/down>
 * switch tab: <cmd> + <left/down>
+* move pane layout: <ctr> + <cmd> + <left/right/up/down>
 
 # atom
 * quick select: <shift> + <cmd> + <left/right/up/down>

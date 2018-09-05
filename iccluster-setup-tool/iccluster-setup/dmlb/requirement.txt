@@ -8,3 +8,7 @@ tensorboard
 ipdb
 lmdb
 joblib
+tensorboard_logger
+pyarrow
+msgpack
+msgpack_numpy

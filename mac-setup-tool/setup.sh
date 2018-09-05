@@ -30,6 +30,7 @@ apms=(
   preview-inline
   python-tools
   remote-sync
+  platformio-ide-terminal
 )
 ####################### EOF: Define a list of app to install #######################
 

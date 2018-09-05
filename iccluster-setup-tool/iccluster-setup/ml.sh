@@ -31,7 +31,7 @@ sudo /opt/anaconda3/bin/conda install -y  opencv protobuf --prefix=$current_env
 sudo /opt/anaconda3/bin/conda install -y pytorch torchvision cuda90 -c pytorch --prefix=$current_env
 
 # install tensorpack
-$pip_in_env install --user -U git+https://github.com/ppwwyyxx/tensorpack.git
+# $pip_in_env install --user -U git+https://github.com/ppwwyyxx/tensorpack.git
 
 # install tensorlfow
-sudo /opt/anaconda3/bin/conda install -y -c anaconda tensorflow-gpu --prefix=$current_env 
+sudo /opt/anaconda3/bin/conda install -y -c anaconda tensorflow-gpu --prefix=$current_env

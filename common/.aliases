@@ -32,6 +32,9 @@ alias gd='git diff'
 alias gm='git commit -m'
 alias gp='git push'
 
+# for conda virtual env activate/deactivate
+alias sa='source activate'
+alias sda='source deactivate'
 
 # local case
 alias ssh_cscs='ssh tlin@ela.cscs.ch'

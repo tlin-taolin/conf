@@ -10,3 +10,11 @@
 # atom
 * quick select: <shift> + <cmd> + <left/right/up/down>
 * quick go to left/righttop/down: <cmd> + <left/right/up/down>
+* pane: show-next-item: <ctr> + <tab>
+* pane: show-previous-item: <ctr> + <shift> + <tab>
+
+## `Platformio IDe Terminal`
+* create a new windows: <shift> + <cmd> + <T>
+* toggle a windows: <ctrl> + <`>
+* previousnext/ windows: <shift> + <cmd> + <J/K>
+* close window: <shift> + <cmd> + <X>

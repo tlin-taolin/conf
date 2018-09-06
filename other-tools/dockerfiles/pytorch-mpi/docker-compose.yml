@@ -5,18 +5,18 @@ services:
             context: .
             dockerfile: base/Dockerfile.cuda9
         image:  itamtao/base:cuda9
-    base.cuda8:
-        build:
-            context: .
-            dockerfile: base/Dockerfile.cuda8
-        image:  itamtao/base:cuda8
-    pytorch-mpi.cuda8:
-        build:
-            context: .
-            dockerfile: pytorch-mpi/Dockerfile.cuda8
-        image:  itamtao/pytorch-mpi:cuda8
-        depends_on:
-          - base.cuda8
+    # base.cuda8:
+    #     build:
+    #         context: .
+    #         dockerfile: base/Dockerfile.cuda8
+    #     image:  itamtao/base:cuda8
+    # pytorch-mpi.cuda8:
+    #     build:
+    #         context: .
+    #         dockerfile: pytorch-mpi/Dockerfile.cuda8
+    #     image:  itamtao/pytorch-mpi:cuda8
+    #     depends_on:
+    #       - base.cuda8
     pytorch-mpi.cuda9:
         build:
             context: .

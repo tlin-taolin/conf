@@ -94,6 +94,10 @@ RUN ssh-keygen -b 2048 -t rsa -f $SSHDIR/id_rsa -q -N ""
 RUN cat ${SSHDIR}/*.pub >> ${SSHDIR}/authorized_keys
 RUN echo "StrictHostKeyChecking no" > ${SSHDIR}/config
 
+# configure screen and tmux
+ADD base/.tmux.conf $HOME/
+ADD base/.screenrc $HOME/
+
 ###### switch to root
 # expose port for ssh and start ssh service.
 EXPOSE 22

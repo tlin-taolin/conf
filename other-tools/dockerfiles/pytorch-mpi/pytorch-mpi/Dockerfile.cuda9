@@ -44,9 +44,9 @@ RUN cd pytorch && \
     pip install -v .
 
 RUN git clone https://github.com/pytorch/vision.git && cd vision && pip install -v .
-RUN pip install -U git+https://github.com/ppwwyyxx/tensorpack.git
+# RUN pip install -U git+https://github.com/ppwwyyxx/tensorpack.git
 RUN $HOME/conda/bin/conda install --name pytorch-py$PYTHON_VERSION -y opencv protobuf
-RUN pip install lmdb
+RUN pip install lmdb tensorboard_logger pyarrow msgpack msgpack_numpy
 
 # configure env for nvidia.
 ENV NVIDIA_VISIBLE_DEVICES all
@@ -54,6 +54,7 @@ ENV NVIDIA_DRIVER_CAPABILITIES compute,utility
 
 ENV NOTVISIBLE "in users profile"
 RUN echo "export VISIBLE=now" | sudo tee --append /etc/profile
+
 # configure the path.
 RUN echo export 'PATH=$HOME/conda/envs/pytorch-py$PYTHON_VERSION/bin:$HOME/.openmpi/bin:$PATH' >> ~/.bashrc
 RUN echo export 'LD_LIBRARY_PATH=$HOME/.openmpi/lib:$LD_LIBRARY_PATH' >> ~/.bashrc

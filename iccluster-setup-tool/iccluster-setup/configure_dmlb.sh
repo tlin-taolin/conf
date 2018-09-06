@@ -45,17 +45,12 @@ sudo /opt/anaconda3/bin/conda install -y -c anaconda cython --prefix=$current_en
 # install left packages.
 $pip_in_env install opencv-python
 
+# install torch and torch-vision.
 git clone --recursive https://github.com/pytorch/pytorch
 cd pytorch && \
     git submodule update --init && \
     TORCH_CUDA_ARCH_LIST="3.5 3.7 5.2 6.0 6.1 7.0+PTX" TORCH_NVCC_FLAGS="-Xfatbin -compress-all" \
     $pip_in_env install -v . && cd .. && rm -rf pytorch/
-
-# install tensorpack
-# $pip_in_env install --user -U git+https://github.com/ppwwyyxx/tensorpack.git
-
-# install tensorlfow
-sudo /opt/anaconda3/bin/conda install -y -c anaconda tensorflow-gpu --prefix=$current_env
 
 # Install torchvision from source
 if [[ "$1" ==  "--no-vision" ]];
@@ -66,3 +61,14 @@ fi
 # install torchvision
 git clone https://github.com/pytorch/vision.git
 cd vision && $python_in_env setup.py install && cd .. && rm -rf vision/
+
+
+# install tensorpack
+# $pip_in_env install --user -U git+https://github.com/ppwwyyxx/tensorpack.git
+
+# install tensorlfow
+sudo /opt/anaconda3/bin/conda install -y -c anaconda tensorflow-gpu --prefix=$current_env
+
+# install notebook.
+sudo /opt/anaconda3/bin/conda install -y notebook ipykernel
+ipython kernel install --user

@@ -2,12 +2,12 @@ FROM itamtao/base:cuda9
 MAINTAINER Tao Lin <itamtao@gmail.com>
 
 # install some necessaries packages for pytorch compiling.
-USER root
-RUN echo "deb http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/x86_64 /" > /etc/apt/sources.list.d/nvidia-ml.list
-RUN apt-get update && apt-get install -y --no-install-recommends --allow-downgrades \
-         libnccl2=2.0.5-3+cuda9.0 \
-         libnccl-dev=2.0.5-3+cuda9.0 &&\
-     rm -rf /var/lib/apt/lists/*
+# USER root
+# RUN echo "deb http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/x86_64 /" > /etc/apt/sources.list.d/nvidia-ml.list
+# RUN apt-get update && apt-get install -y --no-install-recommends --allow-downgrades \
+#          libnccl2=2.0.5-3+cuda9.0 \
+#          libnccl-dev=2.0.5-3+cuda9.0 &&\
+#      rm -rf /var/lib/apt/lists/*
 
 
 USER $NB_USER
@@ -48,19 +48,19 @@ RUN git clone https://github.com/pytorch/vision.git && cd vision && pip install 
 RUN $HOME/conda/bin/conda install --name pytorch-py$PYTHON_VERSION -y opencv protobuf
 RUN pip install lmdb tensorboard_logger pyarrow msgpack msgpack_numpy
 
-# configure env for nvidia.
-ENV NVIDIA_VISIBLE_DEVICES all
-ENV NVIDIA_DRIVER_CAPABILITIES compute,utility
-
-ENV NOTVISIBLE "in users profile"
-RUN echo "export VISIBLE=now" | sudo tee --append /etc/profile
-
-# configure the path.
-RUN echo export 'PATH=$HOME/conda/envs/pytorch-py$PYTHON_VERSION/bin:$HOME/.openmpi/bin:$PATH' >> ~/.bashrc
-RUN echo export 'LD_LIBRARY_PATH=$HOME/.openmpi/lib:$LD_LIBRARY_PATH' >> ~/.bashrc
-# configure the path when using ssh.
-RUN echo "export PATH=$PATH" | sudo tee --append /etc/profile && \
-    echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH" | sudo tee --append /etc/profile && \
-    echo "sudo ldconfig" | sudo tee --append /etc/profile
-RUN sudo sed -i '/AcceptEnv/ s/$/ PATH LD_LIBRARY_PATH/' /etc/ssh/sshd_config && \
-    sudo sed -i '/SendEnv/ s/$/ PATH LD_LIBRARY_PATH/' /etc/ssh/ssh_config
+# # configure env for nvidia.
+# ENV NVIDIA_VISIBLE_DEVICES all
+# ENV NVIDIA_DRIVER_CAPABILITIES compute,utility
+#
+# ENV NOTVISIBLE "in users profile"
+# RUN echo "export VISIBLE=now" | sudo tee --append /etc/profile
+#
+# # configure the path.
+# RUN echo export 'PATH=$HOME/conda/envs/pytorch-py$PYTHON_VERSION/bin:$HOME/.openmpi/bin:$PATH' >> ~/.bashrc
+# RUN echo export 'LD_LIBRARY_PATH=$HOME/.openmpi/lib:$LD_LIBRARY_PATH' >> ~/.bashrc
+# # configure the path when using ssh.
+# RUN echo "export PATH=$PATH" | sudo tee --append /etc/profile && \
+#     echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH" | sudo tee --append /etc/profile && \
+#     echo "sudo ldconfig" | sudo tee --append /etc/profile
+# RUN sudo sed -i '/AcceptEnv/ s/$/ PATH LD_LIBRARY_PATH/' /etc/ssh/sshd_config && \
+#     sudo sed -i '/SendEnv/ s/$/ PATH LD_LIBRARY_PATH/' /etc/ssh/ssh_config

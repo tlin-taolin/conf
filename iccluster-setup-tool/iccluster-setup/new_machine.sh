@@ -6,9 +6,13 @@ cp /mlodata1/tlin/dl-system/conf/common/.aliases ~/
 # install my vim
 curl http://j.mp/spf13-vim3 -L -o - | sh
 
-# configure tmux
-cp -rf /mlodata1/tlin/dl-system/conf/common/.tmux.conf ~/
+# configure screen
 cp -rf /mlodata1/tlin/dl-system/conf/common/.screenrc ~/
 
 # install autojump
 sudo apt-get install autojump
+
+# configure tmux.
+cd && git clone https://github.com/gpakosz/.tmux.git && \
+    ln -s -f .tmux/.tmux.conf && \
+    cp /mlodata1/tlin/dl-system/conf/common/.tmux.conf.local ~/

@@ -38,5 +38,6 @@ alias sda='source deactivate'
 
 # local case
 alias ssh_cscs='ssh tlin@ela.cscs.ch'
-alias mount_iccluster131='sshfs lin@iccluster131.iccluster.epfl.ch:/home/lin $HOME/mount/iccluster131_home -ovolname=iccluster131'
-alias mount_mlodata1='sshfs -o allow_other,transform_symlinks lin@iccluster071.iccluster.epfl.ch:/mlodata1 $HOME/mount/mlodata1 -ovolname=mlodata1'
+alias mount_iccluster098='sshfs lin@iccluster098.iccluster.epfl.ch:/home/lin $HOME/mount/iccluster098_home -ovolname=iccluster098'
+alias mount_mlodata1='sshfs -o allow_other,transform_symlinks lin@iccluster098.iccluster.epfl.ch:/mlodata1 $HOME/mount/mlodata1 -ovolname=mlodata1'
+alias mount_mlocontainer='sshfs -o allow_other,transform_symlinks lin@iccluster098.iccluster.epfl.ch:/mlo-container-scratch $HOME/mount/mlo-container -ovolname=mlocontainer'

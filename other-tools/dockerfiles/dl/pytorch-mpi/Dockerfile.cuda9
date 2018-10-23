@@ -36,7 +36,7 @@ ENV PATH $HOME/conda/envs/pytorch-py$PYTHON_VERSION/bin:$PATH
 RUN $HOME/conda/bin/conda install --name pytorch-py$PYTHON_VERSION -c soumith magma-cuda90
 
 # install pytorch and related software.
-RUN git clone --recursive https://github.com/pytorch/pytorch
+RUN git clone --recursive  https://github.com/pytorch/pytorch
 RUN cd pytorch && \
     git submodule update --init && \
     TORCH_CUDA_ARCH_LIST="3.5 3.7 5.2 6.0 6.1 7.0+PTX" TORCH_NVCC_FLAGS="-Xfatbin -compress-all" \
@@ -47,22 +47,5 @@ RUN git clone https://github.com/pytorch/vision.git && cd vision && pip install 
 # RUN pip install -U git+https://github.com/ppwwyyxx/tensorpack.git
 RUN $HOME/conda/bin/conda install --name pytorch-py$PYTHON_VERSION -y opencv protobuf
 RUN pip install lmdb tensorboard_logger pyarrow msgpack msgpack_numpy mpi4py
-RUN $HOME/conda/bin/conda install --name pytorch-py$PYTHON_VERSION -c anaconda python-blosc
+RUN $HOME/conda/bin/conda install --name pytorch-py$PYTHON_VERSION -c conda-forge python-blosc
 RUN $HOME/conda/bin/conda install --name pytorch-py$PYTHON_VERSION scikit-learn
-
-# # configure env for nvidia.
-# ENV NVIDIA_VISIBLE_DEVICES all
-# ENV NVIDIA_DRIVER_CAPABILITIES compute,utility
-#
-# ENV NOTVISIBLE "in users profile"
-# RUN echo "export VISIBLE=now" | sudo tee --append /etc/profile
-#
-# # configure the path.
-# RUN echo export 'PATH=$HOME/conda/envs/pytorch-py$PYTHON_VERSION/bin:$HOME/.openmpi/bin:$PATH' >> ~/.bashrc
-# RUN echo export 'LD_LIBRARY_PATH=$HOME/.openmpi/lib:$LD_LIBRARY_PATH' >> ~/.bashrc
-# # configure the path when using ssh.
-# RUN echo "export PATH=$PATH" | sudo tee --append /etc/profile && \
-#     echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH" | sudo tee --append /etc/profile && \
-#     echo "sudo ldconfig" | sudo tee --append /etc/profile
-# RUN sudo sed -i '/AcceptEnv/ s/$/ PATH LD_LIBRARY_PATH/' /etc/ssh/sshd_config && \
-#     sudo sed -i '/SendEnv/ s/$/ PATH LD_LIBRARY_PATH/' /etc/ssh/ssh_config

@@ -4,6 +4,7 @@ numpy
 scipy
 setuptools
 sklearn
+seaborn
 tensorboard
 ipdb
 lmdb

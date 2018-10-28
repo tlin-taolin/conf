@@ -34,4 +34,5 @@ sudo /opt/anaconda3/bin/conda install -y pytorch torchvision cuda90 -c pytorch -
 # $pip_in_env install --user -U git+https://github.com/ppwwyyxx/tensorpack.git
 
 # install tensorlfow
-sudo /opt/anaconda3/bin/conda install -y -c anaconda tensorflow-gpu --prefix=$current_env
+# sudo /opt/anaconda3/bin/conda install -y -c anaconda tensorflow-gpu --prefix=$current_env
+sudo /opt/anaconda3/bin/conda install -y -c conda-forge scikit-image --prefix=$current_env

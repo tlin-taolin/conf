@@ -102,6 +102,8 @@ brew install ack
 
 prompt "Install brew software."
 brew cask install atom
+brew cask install sublime-text
+brew cask install visual-studio-code
 brew cask install cleanmymac
 brew cask install docker
 brew cask install dropbox
@@ -112,7 +114,6 @@ brew cask install iterm2
 brew cask install skype
 brew cask install slack
 brew cask install virtualbox
-brew cask install sublime-text
 brew cask install skim
 brew cask install alfred
 brew cask install sourcetree

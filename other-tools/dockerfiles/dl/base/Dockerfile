@@ -103,7 +103,6 @@ RUN echo "StrictHostKeyChecking no" > ${SSHDIR}/config
 ADD base/.tmux.conf $HOME/
 ADD base/.screenrc $HOME/
 
-###### switch to root
 # expose port for ssh and start ssh service.
 EXPOSE 22
 # expose port for notebook.

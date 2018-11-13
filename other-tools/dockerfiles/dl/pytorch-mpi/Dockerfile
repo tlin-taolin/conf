@@ -1,14 +1,5 @@
-FROM itamtao/base:cuda9
+FROM itamtao/base-db:cuda9
 MAINTAINER Tao Lin <itamtao@gmail.com>
-
-# install some necessaries packages for pytorch compiling.
-# USER root
-# RUN echo "deb http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/x86_64 /" > /etc/apt/sources.list.d/nvidia-ml.list
-# RUN apt-get update && apt-get install -y --no-install-recommends --allow-downgrades \
-#          libnccl2=2.0.5-3+cuda9.0 \
-#          libnccl-dev=2.0.5-3+cuda9.0 &&\
-#      rm -rf /var/lib/apt/lists/*
-
 
 USER $NB_USER
 WORKDIR $HOME
@@ -30,22 +21,23 @@ RUN curl -o ~/miniconda.sh -O  https://repo.continuum.io/miniconda/Miniconda3-la
     sh miniconda.sh -b -p $HOME/conda && \
     rm ~/miniconda.sh
 RUN $HOME/conda/bin/conda update -n base conda
-RUN $HOME/conda/bin/conda create -y --name pytorch-py$PYTHON_VERSION python=$PYTHON_VERSION numpy pyyaml scipy ipython mkl mkl-include && \
-    $HOME/conda/bin/conda clean -ya
-ENV PATH $HOME/conda/envs/pytorch-py$PYTHON_VERSION/bin:$PATH
+RUN $HOME/conda/bin/conda create -y --name pytorch-py$PYTHON_VERSION python=$PYTHON_VERSION numpy pyyaml scipy ipython mkl mkl-include
 RUN $HOME/conda/bin/conda install --name pytorch-py$PYTHON_VERSION -c soumith magma-cuda90
+RUN $HOME/conda/bin/conda install --name pytorch-py$PYTHON_VERSION scikit-learn
+RUN $HOME/conda/envs/pytorch-py3.6/bin/pip install pytelegraf
+ENV PATH $HOME/conda/envs/pytorch-py$PYTHON_VERSION/bin:$PATH
 
-# install pytorch and related software.
+# install pytorch, torchvision.
 RUN git clone --recursive  https://github.com/pytorch/pytorch
 RUN cd pytorch && \
     git submodule update --init && \
     TORCH_CUDA_ARCH_LIST="3.5 3.7 5.2 6.0 6.1 7.0+PTX" TORCH_NVCC_FLAGS="-Xfatbin -compress-all" \
     CMAKE_PREFIX_PATH="$(dirname $(which $HOME/conda/bin/conda))/../" \
     pip install -v .
-
 RUN git clone https://github.com/pytorch/vision.git && cd vision && pip install -v .
-# RUN pip install -U git+https://github.com/ppwwyyxx/tensorpack.git
+
+# install other python related softwares.
 RUN $HOME/conda/bin/conda install --name pytorch-py$PYTHON_VERSION -y opencv protobuf
 RUN pip install lmdb tensorboard_logger pyarrow msgpack msgpack_numpy mpi4py
 RUN $HOME/conda/bin/conda install --name pytorch-py$PYTHON_VERSION -c conda-forge python-blosc
-RUN $HOME/conda/bin/conda install --name pytorch-py$PYTHON_VERSION scikit-learn
+RUN $HOME/conda/bin/conda clean -ya

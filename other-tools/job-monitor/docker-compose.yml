@@ -1,0 +1,23 @@
+version: '2'
+services:
+  worker:
+    container_name: lin-worker
+    image: itamtao/base-db:cuda9
+    volumes:
+      - .:/code
+    command: ["sleep", "infinity"]
+    environment:
+      JOBMONITOR_TIMESERIES_HOST: localhost
+    networks:
+      - net
+  timeseries:
+    container_name: lin-timeseries
+    image: influxdb:1.7
+    volumes:
+      # - /mlo-container-scratch/tlin/tlin/databases/runtime-influxdb:/var/lib/influxdb
+      - /Users/lin/Desktop/test:/var/lib/influxdb
+    networks:
+      - net
+
+networks:
+  net:

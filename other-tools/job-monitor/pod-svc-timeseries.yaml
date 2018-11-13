@@ -4,10 +4,10 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: tlin-timeseries
+  name: lin-timeseries
   labels:
-    name: tlin-timeseries
-    user: tlin
+    name: lin-timeseries
+    user: lin
 spec:
   containers:
     - name: influxdb
@@ -31,9 +31,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: tlin-timeseries
+  name: lin-timeseries
   labels:
-    user: tlin
+    user: lin
 spec:
   type: NodePort
   ports:
@@ -41,4 +41,4 @@ spec:
     port: 8086
     protocol: TCP
   selector:
-    name: tlin-timeseries
+    name: lin-timeseries

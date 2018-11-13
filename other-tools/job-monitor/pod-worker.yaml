@@ -1,19 +1,19 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: tlin-worker
+  name: lin-worker
   labels:
-    name: tlin-worker
+    name: lin-worker
     role: worker
-    user: tlin
+    user: lin
 spec:
   containers:
-    - name: tlin-worker
+    - name: lin-worker
       image: ic-registry.epfl.ch/mlo/pytorch-mpi:test
       imagePullPolicy: Always
       env:
         - name: JOBMONITOR_TIMESERIES_HOST
-          value: tlin-timeseries
+          value: lin-timeseries
       resources:
         limits:
           nvidia.com/gpu: 0

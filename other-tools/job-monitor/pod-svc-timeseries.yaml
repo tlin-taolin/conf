@@ -1,0 +1,44 @@
+# InfluxDB timeseries database --
+# This is meant to store training logs and system usage metrics
+# usage: kubectl create -f pod-timeseries.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: tlin-timeseries
+  labels:
+    name: tlin-timeseries
+    user: tlin
+spec:
+  containers:
+    - name: influxdb
+      image: influxdb:1.7
+      ports:
+      - containerPort: 8086
+        name: api
+      volumeMounts:
+      - mountPath: /var/lib/influxdb
+        name: mlodata
+        subPath: tlin/databases/runtime-influxdb
+  volumes:
+  - name: mlodata
+    persistentVolumeClaim:
+      claimName: mlo-scratch
+
+---
+# InfluxDB timeseries database --
+# This 'service' makes sure the open ports in the corresponding 'pod' are accessible.
+# usage: kubectl create -f svc-timeseries.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: tlin-timeseries
+  labels:
+    user: tlin
+spec:
+  type: NodePort
+  ports:
+  - name: http
+    port: 8086
+    protocol: TCP
+  selector:
+    name: tlin-timeseries

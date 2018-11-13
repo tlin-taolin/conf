@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: tlin-worker
+  labels:
+    name: tlin-worker
+    role: worker
+    user: tlin
+spec:
+  containers:
+    - name: tlin-worker
+      image: ic-registry.epfl.ch/mlo/pytorch-mpi:test
+      imagePullPolicy: Always
+      env:
+        - name: JOBMONITOR_TIMESERIES_HOST
+          value: tlin-timeseries
+      resources:
+        limits:
+          nvidia.com/gpu: 0
+      command:
+       - "/bin/bash"
+       - "-c"
+       - "--"
+      args :
+       - '/entrypoint.sh; sleep infinity'
+      volumeMounts:
+        - mountPath: /mlodata1
+          name: mlodata
+  volumes:
+    - name: mlodata
+      persistentVolumeClaim:
+        claimName: mlo-scratch

@@ -1,8 +1,8 @@
 FROM jupyter/scipy-notebook
 
-RUN conda install --quite --yes \
+RUN conda install --quiet --yes \
     opencv \
     scikit-image
 
-RUN conda install --quite --yes pytorch torchvision -c pytorch
+RUN conda install --quiet --yes pytorch torchvision -c pytorch
 RUN pip install influxdb

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
 import socket
-from time import sleep
 
 import numpy as np
 from telegraf.client import TelegrafClient

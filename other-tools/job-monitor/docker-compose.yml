@@ -1,4 +1,5 @@
-version: '2'
+version: '2.3'
+
 services:
   worker:
     container_name: lin-worker
@@ -9,6 +10,7 @@ services:
     command: ["sleep", "infinity"]
     environment:
       JOBMONITOR_TIMESERIES_HOST: localhost
+    runtime: nvidia
     networks:
       - net
   timeseries:

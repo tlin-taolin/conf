@@ -1,14 +1,15 @@
-apiVersion: v1
-kind: ReplicationController
+apiVersion: apps/v1
+kind: StatefulSet
 metadata:
   name: lin-worker
   labels:
     name: lin-worker
     user: lin
 spec:
-  replicas: 1
   selector:
-    name: lin-worker
+    matchLabels:
+      name: lin-worker
+  replicas: 1
   template:
     metadata:
       labels:

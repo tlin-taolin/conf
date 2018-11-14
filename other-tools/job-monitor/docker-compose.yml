@@ -2,9 +2,10 @@ version: '2'
 services:
   worker:
     container_name: lin-worker
-    image: itamtao/base-db:cuda9
+    image: itamtao/pytorch-mpi:cuda9
     volumes:
-      - .:/code
+        #      - /mlo-container-scratch/tlin/:/mlodata1/tlin
+      - /home/lin/mount_from_mlodata1/:/mlodata1/tlin
     command: ["sleep", "infinity"]
     environment:
       JOBMONITOR_TIMESERIES_HOST: localhost
@@ -14,8 +15,8 @@ services:
     container_name: lin-timeseries
     image: influxdb:1.7
     volumes:
-      # - /mlo-container-scratch/tlin/tlin/databases/runtime-influxdb:/var/lib/influxdb
-      - /Users/lin/Desktop/test:/var/lib/influxdb
+      - /mlo-container-scratch/tlin/databases/runtime-influxdb:/var/lib/influxdb
+      # - /Users/lin/Desktop/test:/var/lib/influxdb
     networks:
       - net
 

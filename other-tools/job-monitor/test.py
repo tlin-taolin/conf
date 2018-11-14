@@ -8,7 +8,6 @@ from telegraf.client import TelegrafClient
 
 
 def get_telegraf(job):
-    print(os.getenv('JOBMONITOR_TELEGRAF_HOST'), int(os.getenv('JOBMONITOR_TELEGRAF_PORT')))
     telegraf = TelegrafClient(
         host=os.getenv('JOBMONITOR_TELEGRAF_HOST'),
         port=int(os.getenv('JOBMONITOR_TELEGRAF_PORT')),

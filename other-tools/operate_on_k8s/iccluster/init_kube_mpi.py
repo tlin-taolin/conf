@@ -42,7 +42,7 @@ def get_existing_pod_names():
     existing_pods_info = [re.split(r'\s+', line) for line in lines]
     existing_pods_name = [
         l[0] for l in existing_pods_info
-        if 'dmlb' in l[0] and 'Running' in l[2]]
+        if ('master' in l[0] or 'worker' in l[0]) and 'Running' in l[2]]
     return existing_pods_name
 
 
@@ -80,14 +80,6 @@ def save_hostfile(args, all_info):
     return ips
 
 
-def setup_ssh(existing_pod_names):
-    for existing_pod_name in existing_pod_names:
-        print('setup ssh connection for {}...'.format(existing_pod_name))
-        os.system(
-            "kubectl exec -it {} bash 'entrypoint.sh'".format(
-                existing_pod_name))
-
-
 def main(args):
     print(' get pod names.')
     existing_pod_names = get_existing_pod_names()
@@ -101,9 +93,6 @@ def main(args):
 
     print(' get IPs and save them to path.')
     save_hostfile(args, existing_pods_info)
-
-    print('setup ssh connections')
-    setup_ssh(existing_pod_names)
 
 
 if __name__ == '__main__':

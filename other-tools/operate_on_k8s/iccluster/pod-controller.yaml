@@ -1,4 +1,4 @@
-apiVersion: apps/v1
+apiVersion: apps/v1beta2
 kind: StatefulSet
 metadata:
   name: lin-worker
@@ -9,6 +9,7 @@ spec:
   selector:
     matchLabels:
       name: lin-worker
+  serviceName: lin-worker
   replicas: 1
   template:
     metadata:

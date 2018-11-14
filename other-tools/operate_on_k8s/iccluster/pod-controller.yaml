@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: lin-worker
+  labels:
+    name: lin-worker
+    user: lin
+spec:
+  replicas: 1
+  selector:
+    name: lin-worker
+  template:
+    metadata:
+      labels:
+        name: lin-worker
+        user: lin
+    spec:
+      containers:
+        - name: lin-worker
+          image: ic-registry.epfl.ch/mlo/pytorch-mpi:cuda9
+          imagePullPolicy: Always
+          command:
+           - "/bin/bash"
+           - "-c"
+           - "--"
+          args :
+            - '/entrypoint.sh; /usr/local/bin/entrypoint.sh; sleep infinity'
+          ports:
+            - containerPort: 22
+              name: ssh
+          resources:
+            limits:
+              nvidia.com/gpu: 0
+          env:
+            - name: ROLE
+              value: worker
+            - name: JOBMONITOR_TIMESERIES_HOST
+              value: lin-timeseries
+          volumeMounts:
+            - mountPath: /mlodata1
+              name: mlodata
+            - mountPath: /dev/shm
+              name: dshm
+      volumes:
+        - name: mlodata
+          persistentVolumeClaim:
+            claimName: mlo-scratch
+        - name: dshm
+          emptyDir:
+            medium: Memory

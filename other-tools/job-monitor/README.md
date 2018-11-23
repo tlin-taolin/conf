@@ -15,7 +15,7 @@ Much of the log information that is interesting in ML training forms a timeserie
     - Format: `("training_loss", {"iteration": 1, "value": 0.45}, tags={"host": "iccluster45", "user": "lin", "experiment_id": 10})`
     - Each unique set of 'tags' forms a separate timeseries that can be queried efficiently.
     - We have one node (i.e., pod/container) that runs the database and the other nodes send metrics there.
-    - The tutorial can be found [here](https://docs.influxdata.com/influxdb/v1.7/introduction/getting-started/).
+    - The tutorial can be found [here](https://docs.influxdata.com/influxdb/v1.7/introduction/getting-started/) and [here](https://docs.influxdata.com/influxdb/v1.7/query_language/spec/).
 * [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/): agent for collecting metrics and reporting them to InfluxDB.
     - Designed for high throughput.
     - Keeps a buffer on the worker node that is sent to the database periodically.

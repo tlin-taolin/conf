@@ -9,7 +9,7 @@ services:
       - /home/lin/mount_from_mlodata1/:/mlodata1/tlin
     command: ["sleep", "infinity"]
     environment:
-      JOBMONITOR_TIMESERIES_HOST: localhost
+      JOBMONITOR_TIMESERIES_HOST: lin-timeseries
     runtime: nvidia
     networks:
       - net

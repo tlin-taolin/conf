@@ -1,21 +1,21 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: lin-timeseries
+  name: lin-metadata
   labels:
-    name: lin-timeseries
+    name: lin-metadata
     user: lin
 spec:
   containers:
-    - name: influxdb
-      image: influxdb:1.7
+    - name: mongo
+      image: mongo:4.0
       ports:
-      - containerPort: 8086
-        name: api
+      - containerPort: 27017
+        name: http
       volumeMounts:
-      - mountPath: /var/lib/influxdb
+      - mountPath: /data/db
         name: mlodata
-        subPath: tlin/databases/runtime-influxdb
+        subPath: tlin/databases/metadata-mongodb
   volumes:
   - name: mlodata
     persistentVolumeClaim:
@@ -33,7 +33,7 @@ spec:
   type: NodePort
   ports:
   - name: http
-    port: 8086
+    port: 27017
     protocol: TCP
   selector:
-    name: lin-timeseries
+    name: lin-metadata

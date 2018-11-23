@@ -18,6 +18,11 @@ ENV JOBMONITOR_TIMESERIES_HOST='' \
     JOBMONITOR_TIMESERIES_PORT='8086' \
     JOBMONITOR_TIMESERIES_DB='jobmonitor'
 
+# MongoDB
+ENV JOBMONITOR_METADATA_HOST='' \
+    JOBMONITOR_METADATA_PORT='27017' \
+    JOBMONITOR_METADATA_DB='jobmonitor'
+
 # Add an entrypoint script that will start the telegraf service
 COPY base-with-db/entrypoint.sh /entrypoint.sh
 RUN chmod 777 /entrypoint.sh

@@ -24,7 +24,7 @@ RUN $HOME/conda/bin/conda update -n base conda
 RUN $HOME/conda/bin/conda create -y --name pytorch-py$PYTHON_VERSION python=$PYTHON_VERSION numpy pyyaml scipy ipython mkl mkl-include
 RUN $HOME/conda/bin/conda install --name pytorch-py$PYTHON_VERSION -c soumith magma-cuda90
 RUN $HOME/conda/bin/conda install --name pytorch-py$PYTHON_VERSION scikit-learn
-RUN $HOME/conda/envs/pytorch-py3.6/bin/pip install pytelegraf
+RUN $HOME/conda/envs/pytorch-py3.6/bin/pip install pytelegraf pymongo influxdb kubernetes jinja2
 ENV PATH $HOME/conda/envs/pytorch-py$PYTHON_VERSION/bin:$PATH
 
 # install pytorch, torchvision.

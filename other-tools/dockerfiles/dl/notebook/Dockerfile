@@ -5,4 +5,4 @@ RUN conda install --quiet --yes \
     scikit-image
 
 RUN conda install --quiet --yes pytorch torchvision -c pytorch
-RUN pip install influxdb
+RUN pip install influxdb pymongo pytelegraf bson

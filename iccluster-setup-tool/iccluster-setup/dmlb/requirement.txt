@@ -13,3 +13,4 @@ tensorboard_logger
 pyarrow
 msgpack
 msgpack_numpy
+tensorpack

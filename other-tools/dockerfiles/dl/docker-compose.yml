@@ -19,8 +19,4 @@ services:
         image:  itamtao/pytorch-mpi:cuda9
         depends_on:
           - base.db
-    notebook:
-        build:
-            context: .
-            dockerfile: notebook/Dockerfile
-        image: itamtao/notebook
+

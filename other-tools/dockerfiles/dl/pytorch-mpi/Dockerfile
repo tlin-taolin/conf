@@ -27,17 +27,23 @@ RUN $HOME/conda/bin/conda install --name pytorch-py$PYTHON_VERSION scikit-learn
 RUN $HOME/conda/envs/pytorch-py3.6/bin/pip install pytelegraf pymongo influxdb kubernetes jinja2
 ENV PATH $HOME/conda/envs/pytorch-py$PYTHON_VERSION/bin:$PATH
 
-# install pytorch, torchvision.
+# install pytorch, torchvision, torchtext.
 RUN git clone --recursive  https://github.com/pytorch/pytorch
 RUN cd pytorch && \
+    git checkout tags/v1.0.0 && \
     git submodule update --init && \
     TORCH_CUDA_ARCH_LIST="3.5 3.7 5.2 6.0 6.1 7.0+PTX" TORCH_NVCC_FLAGS="-Xfatbin -compress-all" \
     CMAKE_PREFIX_PATH="$(dirname $(which $HOME/conda/bin/conda))/../" \
     pip install -v .
 RUN git clone https://github.com/pytorch/vision.git && cd vision && pip install -v .
+RUN $HOME/conda/envs/pytorch-py3.6/bin/pip install --upgrade git+https://github.com/pytorch/text
+RUN $HOME/conda/envs/pytorch-py3.6/bin/pip install spacy
+RUN $HOME/conda/envs/pytorch-py3.6/bin/python -m spacy download en
 
 # install other python related softwares.
 RUN $HOME/conda/bin/conda install --name pytorch-py$PYTHON_VERSION -y opencv protobuf
+RUN $HOME/conda/bin/conda install --name pytorch-py$PYTHON_VERSION -y networkx
 RUN pip install lmdb tensorboard_logger pyarrow msgpack msgpack_numpy mpi4py
 RUN $HOME/conda/bin/conda install --name pytorch-py$PYTHON_VERSION -c conda-forge python-blosc
 RUN $HOME/conda/bin/conda clean -ya
+

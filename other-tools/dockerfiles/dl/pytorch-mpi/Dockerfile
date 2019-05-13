@@ -40,10 +40,14 @@ RUN $HOME/conda/envs/pytorch-py3.6/bin/pip install --upgrade git+https://github.
 RUN $HOME/conda/envs/pytorch-py3.6/bin/pip install spacy
 RUN $HOME/conda/envs/pytorch-py3.6/bin/python -m spacy download en
 
+# install bit2byte.
+RUN git clone https://github.com/tvogels/signSGD-with-Majority-Vote.git && \
+    cd signSGD-with-Majority-Vote/main/bit2byte-extension/ && \
+    $HOME/conda/envs/pytorch-py3.6/bin/python setup.py develop --user
+
 # install other python related softwares.
 RUN $HOME/conda/bin/conda install --name pytorch-py$PYTHON_VERSION -y opencv protobuf
 RUN $HOME/conda/bin/conda install --name pytorch-py$PYTHON_VERSION -y networkx
 RUN pip install lmdb tensorboard_logger pyarrow msgpack msgpack_numpy mpi4py
 RUN $HOME/conda/bin/conda install --name pytorch-py$PYTHON_VERSION -c conda-forge python-blosc
 RUN $HOME/conda/bin/conda clean -ya
-

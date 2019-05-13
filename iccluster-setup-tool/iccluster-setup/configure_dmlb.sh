@@ -1,74 +1,24 @@
 #!/bin/bash
 
-# Create and activate env  --  Install pytorch from conda
-echo 'Creating env and Installing pip'
-conda create -y -n dmlb-env python=3.6.3 anaconda pip
-source activate dmlb-env
+# install some dependences.
+PYTHON_VERSION=3.6
+curl -o ~/miniconda.sh -O  https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh  && \
+    sh miniconda.sh -b -p $HOME/conda && \
+    rm ~/miniconda.sh
+$HOME/conda/bin/conda update -n base conda
+$HOME/conda/bin/conda create -y --name pytorch-py$PYTHON_VERSION python=$PYTHON_VERSION numpy pyyaml scipy ipython mkl mkl-include
+$HOME/conda/bin/conda install --name pytorch-py$PYTHON_VERSION -c soumith magma-cuda100
+$HOME/conda/bin/conda install --name pytorch-py$PYTHON_VERSION scikit-learn
+$HOME/conda/envs/pytorch-py3.6/bin/pip install pytelegraf pymongo influxdb kubernetes jinja2
 
-# Get the pip and python and conda from anaconda
-pip_in_env=`which pip`
-python_in_env=`which python`
-current_env=/home/lin/.conda/envs/dmlb-env/
-#conda_in_env=`which conda`
-#current_env=$conda_in_env/../..
-
-echo "USING PYTHON: $python_in_env"
-echo "USING PIP: $pip_in_env"
-echo "USING CONDA IN: $conda_in_env"
-echo "INSTALLING IN: $current_env"
-
-# Install requirements (need cd otherwise sudo is denied...)
-echo 'Installing requirements'
-cd /mlodata1/tlin/dl-system/conf/iccluster-setup-tool/iccluster-setup/dmlb
-sudo $pip_in_env install -r requirement.txt
-
-mpirun --version &> /dev/null
-if [ $? != 0 ]; then
-   echo "MPI is not installed"
-   exit
-fi
-
-cuda_aware=`ompi_info --parsable --all | grep mpi_built_with_cuda_support:value`
-if [ ${cuda_aware##*:} != "true" ]; then
-   echo "MPI is not cuda aware"
-   exit
-fi
-
-# Install pytorch from source
-export CMAKE_PREFIX_PATH="$(dirname $(which conda))/../"
-
-sudo /opt/anaconda3/bin/conda install -y jpeg numpy pyyaml mkl mkl-include setuptools cmake cffi --prefix=$current_env
-sudo /opt/anaconda3/bin/conda install -y -c soumith magma-cuda90 --prefix=$current_env
-sudo /opt/anaconda3/bin/conda install -y protobuf --prefix=$current_env
-sudo /opt/anaconda3/bin/conda install -y -c anaconda cython --prefix=$current_env
-
-# install left packages.
-$pip_in_env install opencv-python
-
-# install torch and torch-vision.
-git clone --recursive https://github.com/pytorch/pytorch
+# configure pytorch
+git clone --recursive  https://github.com/pytorch/pytorch
 cd pytorch && \
+    git checkout tags/v1.0.0 && \
     git submodule update --init && \
     TORCH_CUDA_ARCH_LIST="3.5 3.7 5.2 6.0 6.1 7.0+PTX" TORCH_NVCC_FLAGS="-Xfatbin -compress-all" \
-    $pip_in_env install -v . && cd .. && rm -rf pytorch/
+    CMAKE_PREFIX_PATH="$(dirname $(which $HOME/conda/bin/conda))/../" \
+    pip install -v .
 
-# Install torchvision from source
-if [[ "$1" ==  "--no-vision" ]];
-   then
-    exit 0
-fi
-
-# install torchvision
-git clone https://github.com/pytorch/vision.git
-cd vision && $python_in_env setup.py install && cd .. && rm -rf vision/
-
-
-# install tensorpack
-# $pip_in_env install --user -U git+https://github.com/ppwwyyxx/tensorpack.git
-
-# install tensorlfow
-sudo /opt/anaconda3/bin/conda install -y -c anaconda tensorflow-gpu --prefix=$current_env
-
-# install notebook.
-sudo /opt/anaconda3/bin/conda install -y notebook ipykernel
-ipython kernel install --user
+# append env path to the zshrc. file.
+echo "export PATH=$HOME/conda/envs/pytorch-py$PYTHON_VERSION/bin:$PATH" >> ~/.zshrc

@@ -48,6 +48,6 @@ RUN git clone https://github.com/tvogels/signSGD-with-Majority-Vote.git && \
 # install other python related softwares.
 RUN $HOME/conda/bin/conda install --name pytorch-py$PYTHON_VERSION -y opencv protobuf
 RUN $HOME/conda/bin/conda install --name pytorch-py$PYTHON_VERSION -y networkx
-RUN pip install lmdb tensorboard_logger pyarrow msgpack msgpack_numpy mpi4py
+RUN $HOME/conda/envs/pytorch-py3.6/bin/pip install lmdb tensorboard_logger pyarrow msgpack msgpack_numpy mpi4py
 RUN $HOME/conda/bin/conda install --name pytorch-py$PYTHON_VERSION -c conda-forge python-blosc
 RUN $HOME/conda/bin/conda clean -ya

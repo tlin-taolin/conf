@@ -4,19 +4,19 @@ services:
         build:
             context: .
             dockerfile: base/Dockerfile
-        image:  itamtao/base:cuda9
+        image:  itamtao/base
     base.db:
         build:
             context: .
             dockerfile: base-with-db/Dockerfile
-        image:  itamtao/base-db:cuda9
+        image:  itamtao/base-db
         depends_on:
           - base
     pytorch-mpi:
         build:
             context: .
             dockerfile: pytorch-mpi/Dockerfile
-        image:  itamtao/pytorch-mpi:cuda9
+        image:  itamtao/pytorch-mpi
         depends_on:
           - base.db
 

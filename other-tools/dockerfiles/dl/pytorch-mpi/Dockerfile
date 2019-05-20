@@ -1,4 +1,4 @@
-FROM itamtao/base-db:cuda9
+FROM itamtao/base-db
 MAINTAINER Tao Lin <itamtao@gmail.com>
 
 USER $NB_USER
@@ -22,7 +22,7 @@ RUN curl -o ~/miniconda.sh -O  https://repo.continuum.io/miniconda/Miniconda3-la
     rm ~/miniconda.sh
 RUN $HOME/conda/bin/conda update -n base conda
 RUN $HOME/conda/bin/conda create -y --name pytorch-py$PYTHON_VERSION python=$PYTHON_VERSION numpy pyyaml scipy ipython mkl mkl-include
-RUN $HOME/conda/bin/conda install --name pytorch-py$PYTHON_VERSION -c soumith magma-cuda90
+RUN $HOME/conda/bin/conda install --name pytorch-py$PYTHON_VERSION -c soumith magma-cuda100
 RUN $HOME/conda/bin/conda install --name pytorch-py$PYTHON_VERSION scikit-learn
 RUN $HOME/conda/envs/pytorch-py3.6/bin/pip install pytelegraf pymongo influxdb kubernetes jinja2
 ENV PATH $HOME/conda/envs/pytorch-py$PYTHON_VERSION/bin:$PATH
@@ -30,7 +30,6 @@ ENV PATH $HOME/conda/envs/pytorch-py$PYTHON_VERSION/bin:$PATH
 # install pytorch, torchvision, torchtext.
 RUN git clone --recursive  https://github.com/pytorch/pytorch
 RUN cd pytorch && \
-    git checkout tags/v1.0.0 && \
     git submodule update --init && \
     TORCH_CUDA_ARCH_LIST="3.5 3.7 5.2 6.0 6.1 7.0+PTX" TORCH_NVCC_FLAGS="-Xfatbin -compress-all" \
     CMAKE_PREFIX_PATH="$(dirname $(which $HOME/conda/bin/conda))/../" \

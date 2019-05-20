@@ -1,4 +1,4 @@
-FROM nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
+FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu16.04
 MAINTAINER Tao Lin <itamtao@gmail.com>
 
 
@@ -74,7 +74,7 @@ RUN useradd -m -s /bin/bash -N -u $NB_UID -g $NB_GID $NB_USER && \
     echo "${NB_USER}:${NB_USER}" | chpasswd && \
     usermod -aG sudo,adm,root ${NB_USER} && \
     fix-permissions $HOME
-RUN echo 'lin ALL=(ALL) NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo
+RUN echo '${NB_USER} ALL=(ALL) NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo
 
 # Default ssh config file that skips (yes/no) question when first login to the host
 RUN mkdir /var/run/sshd

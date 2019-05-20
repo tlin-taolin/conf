@@ -1,4 +1,4 @@
-FROM itamtao/base:cuda9
+FROM itamtao/base
 
 USER root
 

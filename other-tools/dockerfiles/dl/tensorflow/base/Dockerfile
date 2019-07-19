@@ -36,7 +36,6 @@ RUN apt-get install -y \
     swig \
     vim \
     git \
-    curl \
     wget \
     unzip \
     zsh \
@@ -44,6 +43,15 @@ RUN apt-get install -y \
     screen \
     tmux \
     openssh-server
+# install curl with sftp and https support.
+RUN sudo apt-get install -y libssl-dev libssh2-1-dev autoconf libtool
+RUN git clone https://github.com/curl/curl.git && \
+    cd curl && \
+    ./buildconf && \
+    ./configure --with-ssl --with-libssh2 && \
+    make && \
+    sudo make install
+# build cmake from source.
 RUN cd /usr/local/src \ 
     && wget https://cmake.org/files/v3.10/cmake-3.10.3.tar.gz \
     && tar xvf cmake-3.10.3.tar.gz \ 

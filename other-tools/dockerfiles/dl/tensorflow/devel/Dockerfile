@@ -39,8 +39,7 @@ RUN git clone https://github.com/lmb-freiburg/lmbspecialops && \
     sudo ln -s /usr/local/cuda/lib64/stubs/libcuda.so /usr/local/cuda/lib64/stubs/libcuda.so.1 && \
     export LD_LIBRARY_PATH=/usr/local/cuda/lib64/stubs/:$LD_LIBRARY_PATH && \
     cmake ..                                                && \
-    make -j                                                 && \
-    sudo rm /usr/local/cuda/lib64/stubs/libcuda.so.1
+    make -j                                                 
 ENV PYTHONPATH="$PYTHONPATH:$HOME/lmbspecialops/python"
 
 # install vtk.
@@ -94,5 +93,6 @@ RUN git clone --recursive https://github.com/lmb-freiburg/demon.git && \
     cd demon && \
     mkdir build && \
     cd build && \
+    export LD_LIBRARY_PATH=/usr/local/cuda/lib64/stubs/:$LD_LIBRARY_PATH && \
     cmake .. && \
     make

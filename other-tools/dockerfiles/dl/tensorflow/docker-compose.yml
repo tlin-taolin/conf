@@ -5,10 +5,3 @@ services:
             context: .
             dockerfile: base/Dockerfile
         image: itamtao/tensorflow-base
-    tensorflow-devel-gpu:
-        build:
-            context: .
-            dockerfile: devel/Dockerfile
-        image: itamtao/tensorflow-devel
-        depends_on:
-          - tensorflow-base

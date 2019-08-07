@@ -1,4 +1,4 @@
-FROM nvidia/cuda:8.0-cudnn6-devel-ubuntu16.04
+FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu18.04
 MAINTAINER Tao Lin <itamtao@gmail.com>
 
 
@@ -22,7 +22,6 @@ RUN apt-get install -y \
     libzmq3-dev \
     libcupti-dev \
     pkg-config \
-    libav-tools \
     libjpeg-dev \
     libpng-dev \
     zlib1g-dev \
@@ -64,11 +63,11 @@ RUN cd /usr/local/src \
 RUN apt-get update && \
     apt-get install -y pciutils net-tools iputils-ping && \
     apt-get install -y htop
-RUN add-apt-repository ppa:openjdk-r/ppa \
-    && apt-get update \
-    && apt-get install -y \
-    openjdk-7-jdk \
-    openjdk-7-jre-headless
+# RUN add-apt-repository ppa:openjdk-r/ppa \
+#     && apt-get update \
+#     && apt-get install -y \
+#     openjdk-7-jdk \
+#     openjdk-7-jre-headless
 # install good vim.
 RUN curl http://j.mp/spf13-vim3 -L -o - | sh
 

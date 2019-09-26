@@ -6,3 +6,4 @@ RUN conda install --quiet --yes \
 
 RUN conda install --quiet --yes pytorch torchvision -c pytorch
 RUN pip install influxdb pymongo pytelegraf bson
+RUN pip install tabulate

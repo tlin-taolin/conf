@@ -37,7 +37,9 @@ RUN cd pytorch && \
 RUN git clone https://github.com/pytorch/vision.git && cd vision && git checkout v0.4.0 && python setup.py install
 RUN $HOME/conda/envs/pytorch-py$PYTHON_VERSION/bin/pip install --upgrade git+https://github.com/pytorch/text
 RUN $HOME/conda/envs/pytorch-py$PYTHON_VERSION/bin/pip install spacy
-RUN $HOME/conda/envs/pytorch-py$PYTHON_VERSION/bin/python -m spacy download en de
+RUN $HOME/conda/envs/pytorch-py$PYTHON_VERSION/bin/python -m spacy download en
+RUN $HOME/conda/envs/pytorch-py$PYTHON_VERSION/bin/python -m spacy download de
+
 
 # install bit2byte.
 RUN git clone https://github.com/tvogels/signSGD-with-Majority-Vote.git && \

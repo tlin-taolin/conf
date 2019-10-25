@@ -20,7 +20,8 @@ ENV PATH $HOME/conda/envs/pytorch-py$PYTHON_VERSION/bin:$PATH
 RUN $HOME/conda/envs/pytorch-py$PYTHON_VERSION/bin/pip install torch==1.1.0 torchvision==0.3.0
 RUN $HOME/conda/envs/pytorch-py$PYTHON_VERSION/bin/pip install --upgrade git+https://github.com/pytorch/text
 RUN $HOME/conda/envs/pytorch-py$PYTHON_VERSION/bin/pip install spacy
-RUN $HOME/conda/envs/pytorch-py$PYTHON_VERSION/bin/python -m spacy download en de
+RUN $HOME/conda/envs/pytorch-py$PYTHON_VERSION/bin/python -m spacy download en
+RUN $HOME/conda/envs/pytorch-py$PYTHON_VERSION/bin/python -m spacy download de
 
 # install bit2byte.
 RUN git clone https://github.com/tvogels/signSGD-with-Majority-Vote.git && \

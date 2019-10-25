@@ -12,11 +12,18 @@ services:
         image:  itamtao/base-db
         depends_on:
           - base
-    pytorch-mpi:
+    pytorch:
         build:
             context: .
-            dockerfile: pytorch-mpi/Dockerfile
-        image:  itamtao/pytorch-mpi
+            dockerfile: pytorch/Dockerfile
+        image:  itamtao/pytorch
         depends_on:
           - base.db
+    # pytorch-mpi:
+    #     build:
+    #         context: .
+    #         dockerfile: pytorch-mpi/Dockerfile
+    #     image:  itamtao/pytorch-mpi
+    #     depends_on:
+    #       - base.db
 

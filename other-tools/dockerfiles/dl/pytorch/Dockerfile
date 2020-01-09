@@ -34,5 +34,6 @@ RUN $HOME/conda/bin/conda install --name pytorch-py$PYTHON_VERSION -y networkx
 RUN $HOME/conda/bin/conda install --name pytorch-py$PYTHON_VERSION -y -c anaconda pandas
 RUN $HOME/conda/bin/conda install --name pytorch-py$PYTHON_VERSION -y -c conda-forge tabulate
 RUN $HOME/conda/envs/pytorch-py$PYTHON_VERSION/bin/pip install lmdb tensorboard_logger pyarrow msgpack msgpack_numpy
+RUN $HOME/conda/envs/pytorch-py$PYTHON_VERSION/bin/pip install sacrebleu
 RUN $HOME/conda/bin/conda install --name pytorch-py$PYTHON_VERSION -c conda-forge python-blosc
 RUN $HOME/conda/bin/conda clean -ya

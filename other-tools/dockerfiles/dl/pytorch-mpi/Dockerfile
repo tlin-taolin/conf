@@ -30,12 +30,13 @@ ENV PATH $HOME/conda/envs/pytorch-py$PYTHON_VERSION/bin:$PATH
 # install pytorch, torchvision, torchtext.
 RUN git clone --recursive  https://github.com/pytorch/pytorch
 RUN cd pytorch && \
+    git checkout tags/v1.5.0 && \
+    git submodule sync && \
     git submodule update --init && \
     TORCH_CUDA_ARCH_LIST="3.5 3.7 5.2 6.0 6.1 7.0+PTX" TORCH_NVCC_FLAGS="-Xfatbin -compress-all" \
     CMAKE_PREFIX_PATH="$(dirname $(which $HOME/conda/bin/conda))/../" \
     pip install -v .
-RUN $HOME/conda/bin/conda install --name pytorch-py$PYTHON_VERSION  av -c conda-forge
-RUN git clone https://github.com/pytorch/vision.git && cd vision && python setup.py install
+RUN git clone https://github.com/pytorch/vision.git && cd vision && git checkout v0.4.0 && python setup.py install
 RUN $HOME/conda/envs/pytorch-py$PYTHON_VERSION/bin/pip install --upgrade git+https://github.com/pytorch/text
 RUN $HOME/conda/envs/pytorch-py$PYTHON_VERSION/bin/pip install spacy
 RUN $HOME/conda/envs/pytorch-py$PYTHON_VERSION/bin/python -m spacy download en

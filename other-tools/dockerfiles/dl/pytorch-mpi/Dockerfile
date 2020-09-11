@@ -17,8 +17,8 @@ ENV LD_LIBRARY_PATH $HOME/.openmpi/lib:$LD_LIBRARY_PATH
 
 # install conda
 ENV PYTHON_VERSION=3.6
-RUN curl -o ~/miniconda.sh -O  https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh  && \
-    sh miniconda.sh -b -p $HOME/conda && \
+RUN curl -o ~/miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh  && \
+    sh ~/miniconda.sh -b -p $HOME/conda && \
     rm ~/miniconda.sh
 RUN $HOME/conda/bin/conda update -n base conda
 RUN $HOME/conda/bin/conda create -y --name pytorch-py$PYTHON_VERSION python=$PYTHON_VERSION numpy pyyaml scipy ipython mkl mkl-include

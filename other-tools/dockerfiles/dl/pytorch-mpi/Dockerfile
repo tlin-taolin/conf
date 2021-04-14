@@ -16,7 +16,7 @@ ENV PATH $HOME/.openmpi/bin:$PATH
 ENV LD_LIBRARY_PATH $HOME/.openmpi/lib:$LD_LIBRARY_PATH
 
 # install conda
-ENV PYTHON_VERSION=3.6
+ENV PYTHON_VERSION=3.7
 RUN curl -o ~/miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh  && \
     sh ~/miniconda.sh -b -p $HOME/conda && \
     rm ~/miniconda.sh
@@ -42,6 +42,8 @@ RUN $HOME/conda/envs/pytorch-py$PYTHON_VERSION/bin/pip install --upgrade git+htt
 RUN $HOME/conda/envs/pytorch-py$PYTHON_VERSION/bin/pip install spacy
 RUN $HOME/conda/envs/pytorch-py$PYTHON_VERSION/bin/python -m spacy download en
 RUN $HOME/conda/envs/pytorch-py$PYTHON_VERSION/bin/python -m spacy download de
+
+RUN $HOME/conda/envs/pytorch-py$PYTHON_VERSION/bin/pip install nltk==3.4.5 transformers==2.2.2
 
 
 # install bit2byte.

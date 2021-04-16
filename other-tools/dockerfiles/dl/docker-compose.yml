@@ -5,13 +5,13 @@ services:
             context: .
             dockerfile: base/Dockerfile
         image:  itamtao/base
-    base.db:
-        build:
-            context: .
-            dockerfile: base-with-db/Dockerfile
-        image:  itamtao/base-db
-        depends_on:
-          - base
+    # base.db:
+    #     build:
+    #         context: .
+    #         dockerfile: base-with-db/Dockerfile
+    #     image:  itamtao/base-db
+    #     depends_on:
+    #       - base
     # pytorch:
     #    build:
     #        context: .
@@ -25,5 +25,5 @@ services:
             dockerfile: pytorch-mpi/Dockerfile
         image:  itamtao/pytorch-mpi
         depends_on:
-            - base.db
+            - base
 

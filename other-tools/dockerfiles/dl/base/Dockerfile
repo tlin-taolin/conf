@@ -1,60 +1,45 @@
-FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu16.04
-MAINTAINER Tao Lin <itamtao@gmail.com>
+FROM nvidia/cuda:11.2.1-cudnn8-devel-ubuntu18.04
 
 
 # install some necessary tools.
 RUN echo "deb http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/x86_64 /" > /etc/apt/sources.list.d/nvidia-ml.list
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-        build-essential \
-        ca-certificates \
-        pkg-config \
-        software-properties-common
+    build-essential \
+    ca-certificates \
+    pkg-config \
+    software-properties-common \
+    g++ \
+    sudo \
+    ccache \
+    cmake \
+    libjpeg-dev \
+    libpng-dev
 RUN apt-get install -y \
-        inkscape \
-        jed \
-        libsm6 \
-        libxext-dev \
-        libxrender1 \
-        lmodern \
-        libcurl3-dev \
-        libfreetype6-dev \
-        libzmq3-dev \
-        libcupti-dev \
-        pkg-config \
-        libav-tools \
-        libjpeg-dev \
-        libpng-dev \
-        zlib1g-dev \
-        locales
-RUN apt-get install -y \
-        sudo \
-        rsync \
-        cmake \
-        g++ \
-        swig \
-        vim \
-        git \
-        curl \
-        wget \
-        unzip \
-        zsh \
-        git \
-        screen \
-        tmux \
-        openssh-server
+    rsync \
+    swig \
+    curl \
+    git \
+    vim \
+    wget \
+    unzip \
+    zsh \
+    screen \
+    tmux \
+    openssh-server
 RUN apt-get update && \
     apt-get install -y pciutils net-tools iputils-ping && \
-    apt-get install -y htop
-RUN add-apt-repository ppa:openjdk-r/ppa \
-    && apt-get update \
-    && apt-get install -y \
-        openjdk-7-jdk \
-        openjdk-7-jre-headless
+    apt-get install -y htop && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN /usr/sbin/update-ccache-symlinks
+RUN mkdir /opt/ccache && ccache --set-config=cache_dir=/opt/ccache
+
 # install good vim.
 RUN curl http://j.mp/spf13-vim3 -L -o - | sh
 
 # configure environments.
+RUN apt-get update && apt-get install -y locales && rm -rf /var/lib/apt/lists/*
 RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && locale-gen
 
 # configure user.
@@ -79,9 +64,9 @@ RUN echo 'lin ALL=(ALL) NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo
 # Default ssh config file that skips (yes/no) question when first login to the host
 RUN mkdir /var/run/sshd
 RUN sed -i "s/#PasswordAuthentication.*/PasswordAuthentication no/g" /etc/ssh/sshd_config \
-  && sed -i "s/#PermitRootLogin.*/PermitRootLogin yes/g" /etc/ssh/sshd_config \
-  && sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config \
-  && sed -i "s/#AuthorizedKeysFile/AuthorizedKeysFile/g" /etc/ssh/sshd_config
+    && sed -i "s/#PermitRootLogin.*/PermitRootLogin yes/g" /etc/ssh/sshd_config \
+    && sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config \
+    && sed -i "s/#AuthorizedKeysFile/AuthorizedKeysFile/g" /etc/ssh/sshd_config
 RUN /usr/bin/ssh-keygen -A
 
 ENV SSHDIR $HOME/.ssh

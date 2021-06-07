@@ -57,6 +57,7 @@ RUN $HOME/conda/bin/conda install --name pytorch-py$PYTHON_VERSION -y networkx
 RUN $HOME/conda/bin/conda install --name pytorch-py$PYTHON_VERSION -y -c anaconda pandas
 RUN $HOME/conda/bin/conda install --name pytorch-py$PYTHON_VERSION -y -c conda-forge tabulate
 RUN $HOME/conda/envs/pytorch-py$PYTHON_VERSION/bin/pip install lmdb tensorboard_logger pyarrow msgpack msgpack_numpy mpi4py
+RUN sudo apt-get update && sudo apt install -y libgl1-mesa-glx && sudo rm -rf /var/lib/apt/lists/*
 RUN $HOME/conda/envs/pytorch-py$PYTHON_VERSION/bin/pip install POT opencv-python
 RUN $HOME/conda/bin/conda install --name pytorch-py$PYTHON_VERSION -c conda-forge python-blosc
 

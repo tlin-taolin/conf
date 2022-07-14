@@ -3,37 +3,6 @@
 defaults write com.apple.desktopservices DSDontWriteNetworkStores false
 ####################### EOF: Define some system settings #######################
 
-####################### Define a list of app to install #######################
-apms=(
-  ensime
-  atom-html-preview
-  autocomplete-python
-  browser-plus
-  goto-definition
-  hyperclick
-  language-docker
-  language-latex
-  language-lua
-  language-matlab
-  language-pfm
-  language-r
-  language-scala
-  latex
-  latexer
-  linter
-  linter-flake8
-  linter-ui-default
-  markdown-preview-plus
-  markdown-preview-plus-opener
-  open-in-browsers
-  pdf-view
-  preview-inline
-  python-tools
-  remote-sync
-  platformio-ide-terminal
-)
-####################### EOF: Define a list of app to install #######################
-
 ####################### Define some helper functions #######################
 function prompt {
   read -p "Hit Enter to $1 ..."
@@ -73,12 +42,6 @@ fi
 brew doctor
 brew tap homebrew/dupes
 
-
-prompt "Install Java"
-brew tap caskroom/versions
-brew cask install java8
-
-
 prompt "Install packages."
 brew install fontconfig
 brew install git
@@ -88,6 +51,7 @@ brew install htop
 brew install iftop
 brew install imagemagick --with-webp
 brew install macvim
+brew install java
 brew install scala
 brew install sbt
 brew install tmux
@@ -101,7 +65,6 @@ brew install ack
 
 
 prompt "Install brew software."
-brew cask install atom
 brew cask install sublime-text
 brew cask install visual-studio-code
 brew cask install cleanmymac
@@ -109,7 +72,6 @@ brew cask install docker
 brew cask install dropbox
 brew cask install firefox
 brew cask install google-chrome
-brew cask install intellij-idea
 brew cask install iterm2
 brew cask install skype
 brew cask install slack
@@ -142,10 +104,6 @@ curl https://j.mp/spf13-vim3 -L -o - | sh
 prompt "Configure tmux and screen."
 cp ../common/.screenrc ~/
 cp ../common/.tmux.conf ~/
-
-prompt "Install apm packages."
-install 'apm install' ${apms[@]}
-
 
 prompt "Install node.js and hexo."
 brew install node

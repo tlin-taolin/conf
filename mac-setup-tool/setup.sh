@@ -65,6 +65,10 @@ brew install ack
 
 
 prompt "Install brew software."
+brew cask install zetero
+brew cask install telegram
+brew cask install numi
+brew cask install spectacle
 brew cask install sublime-text
 brew cask install visual-studio-code
 brew cask install cleanmymac
@@ -75,15 +79,17 @@ brew cask install google-chrome
 brew cask install iterm2
 brew cask install skype
 brew cask install slack
+brew cask install voov-meeting
+brew cask install zoom
 brew cask install virtualbox
 brew cask install skim
 brew cask install alfred
 brew cask install sourcetree
 brew cask install easyfind
 brew cask install macvim
-brew cask install mendeley
+brew cask install notion
 brew cask install dash
-
+brew cask install neteasemusic
 
 prompt "Upgrade and configure zsh"
 brew install zsh zsh-completions zsh-syntax-highlighting

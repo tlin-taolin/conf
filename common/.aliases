@@ -26,7 +26,7 @@ alias grep='grep --color=auto --exclude-dir=\.svn'
 alias svnkdiff3='svn diff --diff-cmd kdiff3'
 
 # Github
-alias gs='git status'
+alias gst='git status'
 alias ga='git add'
 alias gd='git diff'
 alias gm='git commit -m'
@@ -38,6 +38,7 @@ alias sda='source deactivate'
 
 # local case
 alias ssh_cscs='ssh tlin@ela.cscs.ch'
-alias mount_iccluster098='sshfs lin@iccluster098.iccluster.epfl.ch:/home/lin $HOME/mount/iccluster098_home -ovolname=iccluster098'
-alias mount_mlodata1='sshfs -o allow_other,transform_symlinks lin@iccluster098.iccluster.epfl.ch:/mlodata1 $HOME/mount/mlodata1 -ovolname=mlodata1'
-alias mount_mlocontainer='sshfs -o allow_other,transform_symlinks lin@iccluster098.iccluster.epfl.ch:/mlo-container-scratch $HOME/mount/mlo-container -ovolname=mlocontainer'
+alias mount_mlodata1='sshfs -o auto_cache,reconnect,defer_permissions,negative_vncache,allow_other,transform_symlinks lin@iccluster131.iccluster.epfl.ch:/mlodata1 $HOME/mount/mlodata1 -ovolname=mlodata1'
+alias mount_mlocontainer='sshfs -o auto_cache,reconnect,defer_permissions,negative_vncache,allow_other,transform_symlinks lin@iccluster131.iccluster.epfl.ch:/mlo-container-scratch $HOME/mount/mlo-container -ovolname=mlocontainer'
+alias mount_mloraw1='sshfs -o auto_cache,reconnect,defer_permissions,negative_vncache,allow_other,transform_symlinks lin@iccluster131.iccluster.epfl.ch:/mloraw1 $HOME/mount/mloraw1 -ovolname=mloraw1'
+alias mount_mlodata1_k8s='sshfs -o port=30001,auto_cache,reconnect,defer_permissions,negative_vncache,allow_other,transform_symlinks k8s.iccluster.epfl.ch:/mlodata1 $HOME/mount/mlodata1 -ovolname=mlodata1'

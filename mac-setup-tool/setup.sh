@@ -57,10 +57,6 @@ source ~/.aliases' >> ~/.zshrc
 prompt "Install ultimate vim configuration."
 curl https://j.mp/spf13-vim3 -L -o - | sh
 
-prompt "Configure tmux and screen."
-cp ../common/.screenrc ~/
-cp ../common/.tmux.conf ~/
-
 
 prompt "Install packages."
 brew install fontconfig
@@ -70,60 +66,59 @@ brew install iftop
 brew install imagemagick
 brew install macvim
 brew install java
+echo '
+# set java path
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"' >> ~/.zshrc
 brew install scala
 brew install sbt
 brew install tmux
 brew install tree
-brew install vim --with-override-system-vi
 brew install wget
 brew install autojump
+echo '
+# set autojump
+[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh' >> ~/.zshrc
 brew install markdown
 brew install ant
 brew install ack
 
 
 prompt "Install brew software."
-brew cask install iterm2
-brew cask install wechat
-brew cask install zetero
-brew cask install telegram
-brew cask install numi
-brew cask install spectacle
-brew cask install sublime-text
-brew cask install visual-studio-code
-brew cask install cleanmymac
-brew cask install docker
-brew cask install dropbox
-brew cask install firefox
-brew cask install google-chrome
-brew cask install iterm2
-brew cask install skype
-brew cask install slack
-brew cask install voov-meeting
-brew cask install zoom
-brew cask install virtualbox
-brew cask install skim
-brew cask install alfred
-brew cask install sourcetree
-brew cask install easyfind
-brew cask install macvim
-brew cask install notion
-brew cask install dash
-brew cask install neteasemusic
+brew install --cask iterm2
+brew install --cask wechat
+brew install --cask zotero
+brew install --cask telegram
+brew install --cask numi
+brew install --cask spectacle
+brew install --cask sublime-text
+brew install --cask visual-studio-code
+brew install --cask cleanmymac
+brew install --cask docker
+brew install --cask dropbox
+brew install --cask google-chrome
+brew install --cask skype
+brew install --cask slack
+brew install --cask voov-meeting
+brew install --cask zoom
+brew install --cask skim
+brew install --cask notion
+brew install --cask neteasemusic
+brew install --cask anaconda
 
 
-prompt "Install node.js and hexo."
+prompt "Install node.js."
 brew install node
-npm install -g hexo-cli
 
 
-prompt "Install pip and other packages"
-pip install --upgrade pip setuptools wheel
 
+prompt "configure tmux"
+cd
+git clone https://github.com/gpakosz/.tmux.git
+ln -s -f .tmux/.tmux.conf
+cp .tmux/.tmux.conf.local .
 
 prompt "Cleanup"
 brew cleanup
-brew cask cleanup
 
 read -p "Run `mackup restore` after DropBox has done syncing ..."
 echo "Done!"

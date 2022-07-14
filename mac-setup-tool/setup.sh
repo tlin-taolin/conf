@@ -40,16 +40,34 @@ else
   brew upgrade
 fi
 brew doctor
-brew tap homebrew/dupes
+
+
+prompt "Upgrade and configure zsh"
+brew install zsh zsh-completions zsh-syntax-highlighting
+# install oh-my-zsh
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+# configure zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+# configure aliase for zsh
+cp ../common/.aliases ~/
+echo '
+# set aliase
+source ~/.aliases' >> ~/.zshrc
+
+prompt "Install ultimate vim configuration."
+curl https://j.mp/spf13-vim3 -L -o - | sh
+
+prompt "Configure tmux and screen."
+cp ../common/.screenrc ~/
+cp ../common/.tmux.conf ~/
+
 
 prompt "Install packages."
 brew install fontconfig
 brew install git
-brew install git-extras
-brew install gnuplot --with-qt
 brew install htop
 brew install iftop
-brew install imagemagick --with-webp
+brew install imagemagick
 brew install macvim
 brew install java
 brew install scala
@@ -65,6 +83,8 @@ brew install ack
 
 
 prompt "Install brew software."
+brew cask install iterm2
+brew cask install wechat
 brew cask install zetero
 brew cask install telegram
 brew cask install numi
@@ -91,25 +111,6 @@ brew cask install notion
 brew cask install dash
 brew cask install neteasemusic
 
-prompt "Upgrade and configure zsh"
-brew install zsh zsh-completions zsh-syntax-highlighting
-# install oh-my-zsh
-sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-# configure zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-# configure aliase for zsh
-cp ../common/.aliases ~/
-echo '
-# set aliase
-source ~/.aliases' >> ~/.zshrc
-
-prompt "Install ultimate vim configuration."
-curl https://j.mp/spf13-vim3 -L -o - | sh
-
-
-prompt "Configure tmux and screen."
-cp ../common/.screenrc ~/
-cp ../common/.tmux.conf ~/
 
 prompt "Install node.js and hexo."
 brew install node

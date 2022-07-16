@@ -64,6 +64,11 @@ brew install fontconfig
 brew install git
 brew install htop
 brew install iftop
+brew install openssh
+brew install ssh-copy-id
+echo '
+# set for ssh-copy-id
+export PATH="/opt/homebrew/opt/ssh-copy-id/bin:$PATH"' >> ~/.zshrc
 brew install imagemagick
 brew install macvim
 brew install java

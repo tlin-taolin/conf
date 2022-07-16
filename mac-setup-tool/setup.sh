@@ -54,15 +54,6 @@ echo '
 # set aliase
 source ~/.aliases' >> ~/.zshrc
 
-echo '
-# zsh
-fpath=(/usr/local/share/zsh-completions $fpath)
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh' >> ~/.zshrc
-
-echo '
-# k8s.
-export KUBECONFIG=~/.kube/config_runai
-# export KUBECONFIG=~/.kube/config_runai' >> ~/.zshrc
 
 prompt "Install ultimate vim configuration."
 curl https://j.mp/spf13-vim3 -L -o - | sh
@@ -118,6 +109,12 @@ brew install --cask anaconda
 prompt "Install node.js."
 brew install node
 
+
+prompt "Configure KubeConfig"
+echo '
+# k8s.
+export KUBECONFIG=~/.kube/config_runai
+# export KUBECONFIG=~/.kube/config_runai' >> ~/.zshrc
 
 
 prompt "configure tmux"

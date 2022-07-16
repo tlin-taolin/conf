@@ -106,8 +106,12 @@ brew install --cask neteasemusic
 brew install --cask anaconda
 
 
-prompt "Install node.js."
-brew install node
+prompt "Install ruby."
+brew install rbenv ruby-build
+echo '
+# set ruby and rbenv
+eval "$(rbenv init - zsh)"' >> ~/.zshrc
+rbenv install 3.1.2
 
 
 prompt "Configure KubeConfig"

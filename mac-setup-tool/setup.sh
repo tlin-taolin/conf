@@ -54,6 +54,16 @@ echo '
 # set aliase
 source ~/.aliases' >> ~/.zshrc
 
+echo '
+# zsh
+fpath=(/usr/local/share/zsh-completions $fpath)
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh' >> ~/.zshrc
+
+echo '
+# k8s.
+export KUBECONFIG=~/.kube/config_runai
+# export KUBECONFIG=~/.kube/config_runai' >> ~/.zshrc
+
 prompt "Install ultimate vim configuration."
 curl https://j.mp/spf13-vim3 -L -o - | sh
 
@@ -81,7 +91,6 @@ echo '
 brew install markdown
 brew install ant
 brew install ack
-
 
 prompt "Install brew software."
 brew install --cask iterm2

@@ -64,17 +64,22 @@ brew install fontconfig
 brew install git
 brew install htop
 brew install iftop
+
 brew install openssh
 brew install ssh-copy-id
 echo '
 # set for ssh-copy-id
 export PATH="/opt/homebrew/opt/ssh-copy-id/bin:$PATH"' >> ~/.zshrc
+ssh-keygen -b 2048 -t rsa -f $HOME/.ssh/id_rsa -q -N ""
+
 brew install imagemagick
 brew install macvim
+
 brew install java
 echo '
 # set java path
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"' >> ~/.zshrc
+
 brew install scala
 brew install sbt
 brew install tmux

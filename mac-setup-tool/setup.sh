@@ -103,8 +103,11 @@ brew install --cask zoom
 brew install --cask skim
 brew install --cask notion
 brew install --cask neteasemusic
-brew install --cask anaconda
 
+brew install --cask anaconda
+echo '
+# anaconda path
+export PATH="/opt/homebrew/anaconda3/bin:$PATH"' >> ~/.zshrc
 
 prompt "Install ruby."
 brew install rbenv ruby-build

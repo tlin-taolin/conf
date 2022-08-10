@@ -110,7 +110,12 @@ brew install --cask skype
 brew install --cask slack
 brew install --cask voov-meeting
 brew install --cask zoom
+
 brew install --cask skim
+echo '
+# skim
+alias skim=open -a Skim' >> ~/.zshrc
+
 brew install --cask notion
 brew install --cask neteasemusic
 
@@ -139,6 +144,7 @@ cd
 git clone https://github.com/gpakosz/.tmux.git
 ln -s -f .tmux/.tmux.conf
 cp .tmux/.tmux.conf.local .
+
 
 prompt "Cleanup"
 brew cleanup

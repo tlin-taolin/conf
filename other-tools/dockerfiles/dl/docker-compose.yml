@@ -1,25 +1,13 @@
-version: '2'
+version: '3.9'
 services:
     base:
+        platform: linux/x86_64
         build:
             context: .
             dockerfile: base/Dockerfile
         image:  itamtao/base
-    # base.db:
-    #     build:
-    #         context: .
-    #         dockerfile: base-with-db/Dockerfile
-    #     image:  itamtao/base-db
-    #     depends_on:
-    #       - base
-    # pytorch:
-    #    build:
-    #        context: .
-    #        dockerfile: pytorch/Dockerfile
-    #    image:  itamtao/pytorch
-    #    depends_on:
-    #      - base.db
     pytorch-mpi:
+        platform: linux/x86_64
         build:
             context: .
             dockerfile: pytorch-mpi/Dockerfile

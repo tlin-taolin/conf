@@ -45,20 +45,20 @@ RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && locale-gen
 
 # configure user.
 ENV SHELL=/bin/bash \
-    USER=lin \
-    UID=144057 \
-    GROUP=MLO-unit \
-    GID=11169
-ENV HOME=/home/$USER
+    NB_USER=lin \
+    NB_UID=144057 \
+    NB_GROUP=MLO-unit \
+    NB_GID=11169
+ENV HOME=/home/$NB_USER
 
 ADD base/fix-permissions /usr/local/bin/fix-permissions
 RUN chmod +x /usr/local/bin/fix-permissions
 ADD base/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
-RUN groupadd $GROUP -g $GID
-RUN useradd -m -s /bin/bash -N -u $UID -g $GID $USER && \
-    echo "${USER}:${USER}" | chpasswd && \
-    usermod -aG sudo,adm,root ${USER} && \
+RUN groupadd $NB_GROUP -g $NB_GID
+RUN useradd -m -s /bin/bash -N -u $NB_UID -g $NB_GID $NB_USER && \
+    echo "${NB_USER}:${NB_USER}" | chpasswd && \
+    usermod -aG sudo,adm,root ${NB_USER} && \
     fix-permissions $HOME
 RUN echo 'lin ALL=(ALL) NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo
 
@@ -76,11 +76,11 @@ RUN mkdir -p $SSHDIR \
     && chmod 700 $SSHDIR \
     && touch $SSHDIR/authorized_keys \
     && chmod 600 $SSHDIR/authorized_keys \
-    && chown -R ${USER}:${GROUP} ${SSHDIR} \
-    && chown -R ${USER}:${GROUP} /etc/ssh/*
+    && chown -R ${NB_USER}:${NB_GROUP} ${SSHDIR} \
+    && chown -R ${NB_USER}:${NB_GROUP} /etc/ssh/*
 
 ###### switch to user and compile test example.
-USER ${USER}
+USER ${NB_USER}
 RUN ssh-keygen -b 2048 -t rsa -f $SSHDIR/id_rsa -q -N ""
 RUN cat ${SSHDIR}/*.pub >> ${SSHDIR}/authorized_keys
 RUN echo "StrictHostKeyChecking no" > ${SSHDIR}/config

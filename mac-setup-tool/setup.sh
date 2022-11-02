@@ -80,6 +80,8 @@ echo '
 # set java path
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"' >> ~/.zshrc
 
+brew install latexindent
+
 brew install scala
 brew install sbt
 brew install tmux
@@ -149,15 +151,6 @@ cd
 git clone https://github.com/gpakosz/.tmux.git
 ln -s -f .tmux/.tmux.conf
 cp .tmux/.tmux.conf.local .
-
-
-prompt "configure latexindent"
-sudo cpan Unicode::GCString
-sudo cpan App::cpanminus
-sudo cpan YAML::Tiny
-sudo perl -MCPAN -e 'install "File::HomeDir"'
-
-
 
 
 prompt "Cleanup"

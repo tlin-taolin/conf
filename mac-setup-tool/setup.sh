@@ -33,7 +33,7 @@ if test ! $(which brew); then
   xcode-select --install
 
   prompt "Install Homebrew"
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 else
   prompt "Update Homebrew"
   brew update

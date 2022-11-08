@@ -45,7 +45,7 @@ brew doctor
 prompt "Upgrade and configure zsh"
 brew install zsh zsh-completions zsh-syntax-highlighting
 # install oh-my-zsh
-sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+bash -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 # configure zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 # configure aliase for zsh

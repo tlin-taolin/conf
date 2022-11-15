@@ -33,6 +33,8 @@ if test ! $(which brew); then
   xcode-select --install
 
   prompt "Install Homebrew"
+
+  # it still has some issues here.
   bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 else
@@ -130,19 +132,13 @@ echo '
 # anaconda path
 export PATH="/opt/homebrew/anaconda3/bin:$PATH"' >> ~/.zshrc
 
+
 prompt "Install ruby."
 brew install rbenv ruby-build
 echo '
 # set ruby and rbenv
 eval "$(rbenv init - zsh)"' >> ~/.zshrc
 rbenv install 3.1.2
-
-
-prompt "Configure KubeConfig"
-echo '
-# k8s.
-export KUBECONFIG=~/.kube/config_runai
-# export KUBECONFIG=~/.kube/config_runai' >> ~/.zshrc
 
 
 prompt "configure tmux"

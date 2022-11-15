@@ -34,6 +34,7 @@ if test ! $(which brew); then
 
   prompt "Install Homebrew"
   bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
 else
   prompt "Update Homebrew"
   brew update
@@ -104,14 +105,12 @@ prompt "Install brew software."
 brew install --cask iterm2
 brew install --cask wechat
 brew install --cask zotero
-brew install --cask telegram
 brew install --cask numi
 brew install --cask spectacle
 brew install --cask sublime-text
 brew install --cask visual-studio-code
 brew install --cask cleanmymac
 brew install --cask docker
-brew install --cask dropbox
 brew install --cask google-chrome
 brew install --cask skype
 brew install --cask slack

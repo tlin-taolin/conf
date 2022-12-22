@@ -1,3 +1,8 @@
+# configure env.
+echo '
+# configure env
+alias python=/usr/bin/python3' >> ~/.bashrc
+
 # configure tmux
 cd
 git clone https://github.com/gpakosz/.tmux.git

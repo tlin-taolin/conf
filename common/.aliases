@@ -37,8 +37,4 @@ alias sa='source activate'
 alias sda='source deactivate'
 
 # local case
-alias ssh_cscs='ssh tlin@ela.cscs.ch'
-alias mount_mlodata1='sshfs -o auto_cache,reconnect,defer_permissions,negative_vncache,allow_other,transform_symlinks lin@iccluster131.iccluster.epfl.ch:/mlodata1 $HOME/mount/mlodata1 -ovolname=mlodata1'
-alias mount_mlocontainer='sshfs -o auto_cache,reconnect,defer_permissions,negative_vncache,allow_other,transform_symlinks lin@iccluster131.iccluster.epfl.ch:/mlo-container-scratch $HOME/mount/mlo-container -ovolname=mlocontainer'
-alias mount_mloraw1='sshfs -o auto_cache,reconnect,defer_permissions,negative_vncache,allow_other,transform_symlinks lin@iccluster131.iccluster.epfl.ch:/mloraw1 $HOME/mount/mloraw1 -ovolname=mloraw1'
-alias mount_mlodata1_k8s='sshfs -o port=30001,auto_cache,reconnect,defer_permissions,negative_vncache,allow_other,transform_symlinks k8s.iccluster.epfl.ch:/mlodata1 $HOME/mount/mlodata1 -ovolname=mlodata1'
+alias mount_lindata0='sshfs -o auto_cache,reconnect,defer_permissions,negative_vncache,allow_other,transform_symlinks -p 22332 taolin@login.lins.lab:/labdata0 $HOME/mount/labdata0 -ovolname=labdata0'

@@ -74,6 +74,8 @@ echo '
 # set for ssh-copy-id
 export PATH="/opt/homebrew/opt/ssh-copy-id/bin:$PATH"' >> ~/.zshrc
 ssh-keygen -b 2048 -t rsa -f $HOME/.ssh/id_rsa -q -N ""
+brew install macfuse
+echo 'do not forget to install sshfs from https://github.com/osxfuse/sshfs/releases'
 
 brew install imagemagick
 brew install macvim

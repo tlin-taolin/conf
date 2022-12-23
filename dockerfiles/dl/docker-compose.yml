@@ -11,7 +11,9 @@ services:
         build:
             context: .
             dockerfile: pytorch-mpi/Dockerfile
-        image:  itamtao/pytorch-mpi
+            args:
+                http_proxy: http://192.168.123.169:18889
+                https_proxy: http://192.168.123.169:18889
+        image: itamtao/pytorch-mpi
         depends_on:
             - base
-

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 ####################### Define some system settings #######################
-defaults write com.apple.desktopservices DSDontWriteNetworkStores false
+defaults write com.apple.desktopservices DSDontWriteNetworkStores true 
 ####################### EOF: Define some system settings #######################
 
 ####################### Define some helper functions #######################

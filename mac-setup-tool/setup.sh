@@ -35,7 +35,8 @@ if test ! $(which brew); then
   prompt "Install Homebrew"
 
   # it still has some issues here.
-  bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
 
 else
   prompt "Update Homebrew"
